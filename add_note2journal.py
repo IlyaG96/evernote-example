@@ -1,4 +1,3 @@
-#!/usr/bin/env python 
 from datetime import date, datetime, timedelta
 import argparse
 import json
@@ -8,13 +7,13 @@ from config import EVERNOTE_PERSONAL_TOKEN, JOURNAL_TEMPLATE_NOTE_GUID, JOURNAL_
 
 
 WEEK_DAYS = {
-    1: u'понедельник',
-    2: u'вторник',
-    3: u'среда',
-    4: u'четверг',
-    5: u'пятница',
-    6: u'суббота',
-    7: u'воскресенье',
+    1: 'понедельник',
+    2: 'вторник',
+    3: 'среда',
+    4: 'четверг',
+    5: 'пятница',
+    6: 'суббота',
+    7: 'воскресенье',
 }
 
 
@@ -31,7 +30,7 @@ def is_valid_date(text):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description=u'Adds note to notebook "Дневник", uses template note')
+    parser = argparse.ArgumentParser(description='Adds note to notebook "Дневник", uses template note')
     parser.add_argument('date',
                         nargs='?',
                         type=is_valid_date,
@@ -40,7 +39,7 @@ if __name__ == '__main__':
 
     client = EvernoteClient(
         token=EVERNOTE_PERSONAL_TOKEN,
-        sandbox=False # Default: True
+        sandbox=True
     )
     noteStore = client.get_note_store()
 
@@ -58,5 +57,5 @@ if __name__ == '__main__':
     new_note.title = utitle.encode('utf8')
     noteStore.updateNote(new_note)
     
-    print(u'Note created: %s' % utitle)
+    print('Note created: %s' % utitle)
     print('Done')

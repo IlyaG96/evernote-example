@@ -2,6 +2,7 @@ from dotenv import load_dotenv
 import os
 
 load_dotenv()
+
 EVERNOTE_CONSUMER_KEY = os.getenv("EVERNOTE_CONSUMER_KEY")
 EVERNOTE_CONSUMER_SECRET = os.getenv("EVERNOTE_CONSUMER_SECRET")
 EVERNOTE_PERSONAL_TOKEN = os.getenv("EVERNOTE_PERSONAL_TOKEN")
