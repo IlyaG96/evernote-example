@@ -4,7 +4,7 @@ import argparse
 import json
 
 from evernote.api.client import EvernoteClient
-from config import Settings
+from config import EVERNOTE_PERSONAL_TOKEN, JOURNAL_TEMPLATE_NOTE_GUID, JOURNAL_NOTEBOOK_GUID
 
 
 WEEK_DAYS = {
@@ -38,10 +38,8 @@ if __name__ == '__main__':
                         help='date in format "YYYY-MM-DD"')
     args = parser.parse_args()
 
-    config = Settings()
-
     client = EvernoteClient(
-        token=config.EVERNOTE_PERSONAL_TOKEN,
+        token=EVERNOTE_PERSONAL_TOKEN,
         sandbox=False # Default: True
     )
     noteStore = client.get_note_store()
@@ -54,7 +52,7 @@ if __name__ == '__main__':
     print('Title Context is:')
     print(json.dumps(context, ensure_ascii=False, indent=4))
 
-    new_note = noteStore.copyNote(config.JOURNAL_TEMPLATE_NOTE_GUID, config.JOURNAL_NOTEBOOK_GUID)
+    new_note = noteStore.copyNote(JOURNAL_TEMPLATE_NOTE_GUID, JOURNAL_NOTEBOOK_GUID)
     utitle_without_comment = new_note.title.decode('utf8').split('#', 1)[0]
     utitle = utitle_without_comment.strip().format(**context)
     new_note.title = utitle.encode('utf8')
